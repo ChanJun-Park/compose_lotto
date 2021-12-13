@@ -3,11 +3,11 @@ package com.jingom.composelotto.ui.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.ViewModelProvider
+import com.jingom.composelotto.LottoRepositoryImpl
 import com.jingom.composelotto.api.DHLottoApi
 import com.jingom.composelotto.ui.lotto.LotteryResult
 import com.jingom.composelotto.ui.theme.ComposeLottoTheme
@@ -24,7 +24,9 @@ class MainActivity : ComponentActivity() {
 	}
 
 	private fun initViewModel() {
-		val viewModelFactory = MainActivityViewModelFactory(DHLottoApi.retrofitService)
+		val lottoRepository = LottoRepositoryImpl(DHLottoApi.retrofitService)
+
+		val viewModelFactory = MainActivityViewModelFactory(lottoRepository)
 
 		viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 	}
@@ -32,10 +34,10 @@ class MainActivity : ComponentActivity() {
 	@Composable
 	private fun ComposeLotto() {
 		ComposeLottoTheme {
-			val lottoNumber by viewModel.lottoResponse.observeAsState()
+			val lottoNumber by viewModel.lottoResult.observeAsState()
 
 			lottoNumber?.let {
-				LotteryResult(response = it)
+				LotteryResult(DH = it)
 			}
 		}
 	}
