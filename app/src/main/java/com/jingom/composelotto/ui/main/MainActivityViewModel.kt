@@ -3,13 +3,18 @@ package com.jingom.composelotto.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jingom.composelotto.api.DHLottoApi
+import com.jingom.composelotto.api.DHLottoApiService
 import com.jingom.composelotto.api.model.LottoResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel(private val lottoApiService: DHLottoApiService) : ViewModel() {
 	private val _lottoNumber = MutableLiveData<LottoResponse>()
 	val lottoResponse: LiveData<LottoResponse>
 		get() = _lottoNumber
@@ -19,16 +24,16 @@ class MainActivityViewModel : ViewModel() {
 	}
 
 	private fun getLottoNumber() {
-		DHLottoApi.retrofitService.getLottoNumber("getLottoNumber", 988).enqueue(object : Callback<LottoResponse> {
-			override fun onFailure(call: Call<LottoResponse>, t: Throwable) {
-				_lottoNumber.value = null
+		viewModelScope.launch {
+			val lottoResponse = withContext(Dispatchers.IO) {
+				lottoApiService.getLottoNumber("getLottoNumber", 988)
 			}
 
-			override fun onResponse(call: Call<LottoResponse>, response: Response<LottoResponse>) {
-				response.body()?.let {
-					_lottoNumber.value = it
-				}
+			_lottoNumber.value = if (lottoResponse.isSuccessful) {
+				lottoResponse.body()
+			} else {
+				null
 			}
-		})
+		}
 	}
 }

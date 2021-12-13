@@ -106,30 +106,30 @@ fun LotteryResult(response: LottoResponse) {
 			) {
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo1
+					number = response.no1
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo2
+					number = response.no2
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo3
+					number = response.no3
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo4
+					number = response.no4
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo5
+					number = response.no5
 				)
 				BonusNumberDescriptionCell(
 					modifier = Modifier.weight(1f)
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = response.drwtNo6
+					number = response.no6
 				)
 			}
 		}

@@ -7,16 +7,26 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.lifecycle.ViewModelProvider
+import com.jingom.composelotto.api.DHLottoApi
 import com.jingom.composelotto.ui.lotto.LotteryResult
 import com.jingom.composelotto.ui.theme.ComposeLottoTheme
 
 class MainActivity : ComponentActivity() {
 
-	private val viewModel: MainActivityViewModel by viewModels()
+	private lateinit var viewModel: MainActivityViewModel
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContent { ComposeLotto() }
+
+		initViewModel()
+	}
+
+	private fun initViewModel() {
+		val viewModelFactory = MainActivityViewModelFactory(DHLottoApi.retrofitService)
+
+		viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 	}
 
 	@Composable
