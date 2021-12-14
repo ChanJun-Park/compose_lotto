@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 private const val INVALID = -1
 const val SUCCESS_RESULT_STRING = "success"
 
-data class DHLotto(
+data class DHLottoResponseBody(
 	@Json(name = "returnValue")
 	val apiResult: String,
 	@Json(name = "drwNoDate")

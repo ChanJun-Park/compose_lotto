@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jingom.composelotto.R
-import com.jingom.composelotto.api.model.DHLotto
+import com.jingom.composelotto.api.model.DHLottoResponseBody
 import com.jingom.composelotto.support.util.DisplayUtils
 import com.jingom.composelotto.ui.theme.LottoNumberSurfaceBlack
 import com.jingom.composelotto.ui.theme.LottoNumberYellow
@@ -88,7 +88,7 @@ fun BonusNumberDescriptionCell(
 }
 
 @Composable
-fun LotteryResult(DH: DHLotto) {
+fun LotteryResult(lottoResponseBody: DHLottoResponseBody) {
 	Surface(
 		modifier = Modifier
 			.fillMaxHeight()
@@ -106,30 +106,30 @@ fun LotteryResult(DH: DHLotto) {
 			) {
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no1
+					number = lottoResponseBody.no1
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no2
+					number = lottoResponseBody.no2
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no3
+					number = lottoResponseBody.no3
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no4
+					number = lottoResponseBody.no4
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no5
+					number = lottoResponseBody.no5
 				)
 				BonusNumberDescriptionCell(
 					modifier = Modifier.weight(1f)
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = DH.no6
+					number = lottoResponseBody.no6
 				)
 			}
 		}
@@ -172,7 +172,7 @@ fun LottoBallPreview5() {
 @Preview
 @Composable
 fun LottoResponsePreview() {
-	val response = DHLotto(
+	val response = DHLottoResponseBody(
 		"test",
 		"test",
 		5555L,

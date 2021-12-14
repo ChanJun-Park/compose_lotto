@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 			val lottoNumber by viewModel.lottoResult.observeAsState()
 
 			lottoNumber?.let {
-				LotteryResult(DH = it)
+				LotteryResult(lottoResponseBody = it)
 			}
 		}
 	}

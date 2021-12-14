@@ -1,17 +1,17 @@
 package com.jingom.composelotto
 
 import com.jingom.composelotto.api.DHLottoApiService
-import com.jingom.composelotto.api.model.DHLotto
+import com.jingom.composelotto.api.model.DHLottoResponseBody
 import com.jingom.composelotto.api.model.SUCCESS_RESULT_STRING
 import com.jingom.composelotto.support.util.LottoUtils
 import retrofit2.Response
 
 class LottoRepositoryImpl(private val lottoApiService: DHLottoApiService): LottoRepository {
 
-	private lateinit var lastDHLotto: DHLotto
+	private lateinit var lastDHLottoResponseBody: DHLottoResponseBody
 
-	override suspend fun getLastLottoResponse(): DHLotto {
-		var lottoResponse: Response<DHLotto>?
+	override suspend fun getLastLottoResult(): DHLottoResponseBody {
+		var lottoResponse: Response<DHLottoResponseBody>?
 		var lotteryNumber = LottoUtils.KNOWN_LOTTERY_NO
 
 		while(true) {
@@ -21,16 +21,16 @@ class LottoRepositoryImpl(private val lottoApiService: DHLottoApiService): Lotto
 			}
 
 			lottoResponse.body()?.let {
-				lastDHLotto = it
+				lastDHLottoResponseBody = it
 				lotteryNumber++
 			}
 		}
 
-		return lastDHLotto
+		return lastDHLottoResponseBody
 	}
 
-	private fun isInvalidResponse(response: Response<DHLotto>): Boolean {
-		val lottoResult = response.body()
-		return (!response.isSuccessful || lottoResult == null || lottoResult.apiResult != SUCCESS_RESULT_STRING)
+	private fun isInvalidResponse(response: Response<DHLottoResponseBody>): Boolean {
+		val lottoResponseBody = response.body()
+		return (!response.isSuccessful || lottoResponseBody == null || lottoResponseBody.apiResult != SUCCESS_RESULT_STRING)
 	}
 }

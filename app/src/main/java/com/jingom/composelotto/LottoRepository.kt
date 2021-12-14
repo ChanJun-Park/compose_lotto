@@ -1,7 +1,7 @@
 package com.jingom.composelotto
 
-import com.jingom.composelotto.api.model.DHLotto
+import com.jingom.composelotto.api.model.DHLottoResponseBody
 
 interface LottoRepository {
-	suspend fun getLastLottoResponse(): DHLotto
+	suspend fun getLastLottoResult(): DHLottoResponseBody
 }
