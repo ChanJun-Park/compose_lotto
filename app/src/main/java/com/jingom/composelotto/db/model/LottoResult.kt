@@ -1,15 +1,17 @@
 package com.jingom.composelotto.db.model
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-private const val INVALID = -1
+@VisibleForTesting
+const val INVALID = -1
 
 @Entity(tableName = "lotto_result")
 data class LottoResult(
 	@PrimaryKey(autoGenerate = true)
-	val id: Long,
+	val id: Long = 0,
 
 	val day: String?,
 
