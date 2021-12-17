@@ -5,9 +5,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jingom.composelotto.db.LottoDatabase
 import com.jingom.composelotto.db.model.LottoResult
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
