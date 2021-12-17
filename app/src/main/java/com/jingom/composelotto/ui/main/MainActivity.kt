@@ -22,14 +22,8 @@ class MainActivity : ComponentActivity() {
 		setContent { ComposeLotto() }
 
 		initViewModel()
-	}
 
-	private fun initViewModel() {
-		val lottoRepository = LottoRepositoryImpl(DHLottoApi.retrofitService, LottoDatabase.getInstance(this).lottoResultDao)
-
-		val viewModelFactory = MainActivityViewModelFactory(lottoRepository)
-
-		viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
+		observeEvent()
 	}
 
 	@Composable
@@ -40,6 +34,20 @@ class MainActivity : ComponentActivity() {
 			lottoNumber?.let {
 				LotteryResult(lottoResult = it)
 			}
+		}
+	}
+
+	private fun initViewModel() {
+		val lottoRepository = LottoRepositoryImpl(DHLottoApi.retrofitService, LottoDatabase.getInstance(this).lottoResultDao)
+
+		val viewModelFactory = MainActivityViewModelFactory(application, lottoRepository)
+
+		viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
+	}
+
+	private fun observeEvent() {
+		viewModel.networkConnectionLiveData.observe(this) { isConnected ->
+			viewModel.getLastLottoNumber(isConnected)
 		}
 	}
 }

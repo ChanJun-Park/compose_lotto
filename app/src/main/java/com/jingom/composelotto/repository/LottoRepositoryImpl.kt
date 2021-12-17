@@ -17,8 +17,12 @@ class LottoRepositoryImpl(
 
 	private lateinit var latestLottoResult: LottoResult
 
-	override suspend fun getLastLottoResult(): LottoResult {
+	override suspend fun getLastLottoResult(isInternetAvailable: Boolean): LottoResult {
 		val lastLottoResultInDB = lottoResultDao.getLatest()
+
+		if (!isInternetAvailable) {
+			return lastLottoResultInDB ?: throw IllegalStateException("Not yet ready for offline cache")
+		}
 
 		if (lastLottoResultInDB != null && isLatestLottoResult(lastLottoResultInDB)) {
 			latestLottoResult = lastLottoResultInDB
