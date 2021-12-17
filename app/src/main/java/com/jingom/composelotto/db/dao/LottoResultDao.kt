@@ -2,14 +2,15 @@ package com.jingom.composelotto.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
 import androidx.room.Update
 import com.jingom.composelotto.db.model.LottoResult
 
 @Dao
 interface LottoResultDao {
-	@Insert
-	suspend fun insert(lottoResult: LottoResult)
+	@Insert(onConflict = IGNORE)
+	suspend fun insert(lottoResult: LottoResult): Long
 
 	@Update
 	suspend fun update(lottoResult: LottoResult): Int

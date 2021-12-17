@@ -13,7 +13,7 @@ data class LottoResult(
 	@PrimaryKey(autoGenerate = true)
 	val id: Long = 0,
 
-	val day: String?,
+	val day: String? = "",
 
 	@ColumnInfo(name = "total_sell_amount")
 	val totalSellAmount: Long = INVALID.toLong(),
