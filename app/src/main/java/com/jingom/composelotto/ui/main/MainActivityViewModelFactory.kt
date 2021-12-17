@@ -2,7 +2,7 @@ package com.jingom.composelotto.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jingom.composelotto.LottoRepository
+import com.jingom.composelotto.repository.LottoRepository
 
 @SuppressWarnings("unchecked")
 class MainActivityViewModelFactory(private val lottoRepository: LottoRepository) : ViewModelProvider.Factory {
