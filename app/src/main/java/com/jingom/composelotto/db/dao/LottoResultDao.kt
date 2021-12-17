@@ -16,13 +16,13 @@ interface LottoResultDao {
 	suspend fun update(lottoResult: LottoResult): Int
 
 	@Query("SELECT * FROM lotto_result WHERE id = :id")
-	suspend fun get(id: Long): LottoResult
+	suspend fun get(id: Long): LottoResult?
 
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC")
 	suspend fun getAll(): List<LottoResult>
 
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC LIMIT 1")
-	suspend fun getLatest(): LottoResult
+	suspend fun getLatest(): LottoResult?
 
 	@Query("DELETE FROM lotto_result")
 	suspend fun clear()
