@@ -24,6 +24,12 @@ interface LottoResultDao {
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC LIMIT 1")
 	suspend fun getLatest(): LottoResult?
 
+	@Query("SELECT lottery_no FROM lotto_result ORDER BY lottery_no ASC LIMIT 1")
+	suspend fun getFirstLotteryNoInDB(): Int?
+
+	@Query("SELECT lottery_no FROM lotto_result ORDER BY lottery_no DESC LIMIT 1")
+	suspend fun getLastLotteryNoInDB(): Int?
+
 	@Query("DELETE FROM lotto_result")
 	suspend fun clear()
 }
