@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jingom.composelotto.R
 import com.jingom.composelotto.api.model.DHLottoResponseBody
+import com.jingom.composelotto.db.model.LottoResult
 import com.jingom.composelotto.support.util.DisplayUtils
 import com.jingom.composelotto.ui.theme.LottoNumberSurfaceBlack
 import com.jingom.composelotto.ui.theme.LottoNumberYellow
@@ -88,7 +89,7 @@ fun BonusNumberDescriptionCell(
 }
 
 @Composable
-fun LotteryResult(lottoResponseBody: DHLottoResponseBody) {
+fun LotteryResult(lottoResult: LottoResult) {
 	Surface(
 		modifier = Modifier
 			.fillMaxHeight()
@@ -106,30 +107,30 @@ fun LotteryResult(lottoResponseBody: DHLottoResponseBody) {
 			) {
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no1
+					number = lottoResult.no1
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no2
+					number = lottoResult.no2
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no3
+					number = lottoResult.no3
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no4
+					number = lottoResult.no4
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no5
+					number = lottoResult.no5
 				)
 				BonusNumberDescriptionCell(
 					modifier = Modifier.weight(1f)
 				)
 				LottoBallCell(
 					modifier = Modifier.weight(1f),
-					number = lottoResponseBody.no6
+					number = lottoResult.no6
 				)
 			}
 		}
@@ -172,21 +173,20 @@ fun LottoBallPreview5() {
 @Preview
 @Composable
 fun LottoResponsePreview() {
-	val response = DHLottoResponseBody(
-		"test",
-		"test",
-		5555L,
-		5555L,
-		5555,
-		5555,
-		1,
-		11,
-		21,
-		31,
-		41,
-		44,
-		45,
-		1
+	val response = LottoResult(
+		day = "2021-12-18",
+		totalSellAmount = 5555L,
+		firstWinAmount = 5555L,
+		firstPrizeWinnerCount = 5555,
+		firstAccumulatedAmount = 5555,
+		no1 = 1,
+		no2 = 11,
+		no3 = 21,
+		no4 = 31,
+		no5 = 41,
+		no6 = 44,
+		bonusNo = 45,
+		lotteryNo = 1
 	)
 
 	LotteryResult(response)
