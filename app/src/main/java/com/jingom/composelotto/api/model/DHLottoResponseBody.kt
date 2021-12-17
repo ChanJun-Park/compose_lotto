@@ -35,3 +35,7 @@ data class DHLottoResponseBody(
 	@Json(name = "drwNo")
 	val lotteryNo: Int = INVALID
 )
+
+fun DHLottoResponseBody.isFail() = !isSuccess()
+
+fun DHLottoResponseBody.isSuccess() = apiResult == SUCCESS_RESULT_STRING
