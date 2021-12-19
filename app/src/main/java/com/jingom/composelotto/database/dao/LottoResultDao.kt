@@ -10,7 +10,7 @@ import com.jingom.composelotto.database.model.DatabaseLottoResult
 @Dao
 interface LottoResultDao {
 	@Insert(onConflict = REPLACE)
-	suspend fun insert(lottoResult: DatabaseLottoResult): Long
+	suspend fun insert(lottoResult: DatabaseLottoResult)
 
 	@Update
 	suspend fun update(lottoResult: DatabaseLottoResult): Int

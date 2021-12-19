@@ -38,43 +38,43 @@ class LottoResultDaoTest {
 	@Throws(Exception::class)
 	fun insertAndGetLottoResult() = runBlocking {
 		for (index in 1..10) {
-			val lottoResult = createDummyResult().copy(lotteryNo = index)
+			val lottoResult = createDummyResult().copy(lotteryNo = index, no1 = index)
 
 			lottoResultDao.insert(lottoResult)
 		}
 
-		val dbLottoResult = lottoResultDao.get(id = 5)
+		val dbLottoResult = lottoResultDao.get(lotteryNo = 5)
 
-		assertEquals(createDummyResult().copy(id = 5, lotteryNo = 5), dbLottoResult)
+		assertEquals(createDummyResult().copy(lotteryNo = 5, no1 = 5), dbLottoResult)
 	}
 
 	@Test
 	@Throws(Exception::class)
 	fun insertAndGetLatestLottoResult() = runBlocking {
 		for (index in 1..10) {
-			val lottoResult = createDummyResult().copy(lotteryNo = index)
+			val lottoResult = createDummyResult().copy(lotteryNo = index, no1 = index)
 
 			lottoResultDao.insert(lottoResult)
 		}
 
 		val dbLottoResult = lottoResultDao.getLatest()
-		assertEquals(createDummyResult().copy(id = 10, lotteryNo = 10), dbLottoResult)
+		assertEquals(createDummyResult().copy(lotteryNo = 10, no1 = 10), dbLottoResult)
 	}
 
 	@Test
 	@Throws(Exception::class)
 	fun updateTest() = runBlocking {
-		val lottoResult = createDummyResult().copy(lotteryNo = 5)
+		val lottoResult = createDummyResult().copy(lotteryNo = 5, no1 = 5)
 
-		val insertedItemId = lottoResultDao.insert(lottoResult)
+		lottoResultDao.insert(lottoResult)
 
-		assertEquals(lottoResult.copy(id = insertedItemId), lottoResultDao.get(insertedItemId))
+		assertEquals(lottoResult.copy(lotteryNo = 5), lottoResultDao.get(5))
 
-		val modifiedResult = lottoResult.copy(id = insertedItemId, lotteryNo = 7)
+		val modifiedResult = lottoResult.copy(lotteryNo = 5, no1 = 7)
 
 		lottoResultDao.update(modifiedResult)
 
-		assertEquals(modifiedResult, lottoResultDao.get(insertedItemId))
+		assertEquals(modifiedResult, lottoResultDao.get(5))
 	}
 
 	@Test
@@ -83,7 +83,7 @@ class LottoResultDaoTest {
 		val targetResultList = mutableListOf<DatabaseLottoResult>()
 
 		for (index in 1..10) {
-			val lottoResult = createDummyResult().copy(id = index.toLong(), lotteryNo = index)
+			val lottoResult = createDummyResult().copy(lotteryNo = index, no1 = index)
 
 			targetResultList += lottoResult
 			lottoResultDao.insert(lottoResult)
