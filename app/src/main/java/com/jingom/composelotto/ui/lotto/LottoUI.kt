@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jingom.composelotto.R
-import com.jingom.composelotto.database.model.DatabaseLottoResult
 import com.jingom.composelotto.support.util.DisplayUtils
+import com.jingom.composelotto.ui.model.LottoResult
 import com.jingom.composelotto.ui.theme.LottoNumberSurfaceBlack
 import com.jingom.composelotto.ui.theme.LottoNumberYellow
 import com.jingom.composelotto.ui.util.LottoNumberUtil
@@ -88,7 +88,7 @@ fun BonusNumberDescriptionCell(
 }
 
 @Composable
-fun LotteryResult(lottoResult: DatabaseLottoResult) {
+fun LotteryResult(lottoResult: LottoResult) {
 	Surface(
 		modifier = Modifier
 			.fillMaxHeight()
@@ -172,12 +172,8 @@ fun LottoBallPreview5() {
 @Preview
 @Composable
 fun LottoResponsePreview() {
-	val response = DatabaseLottoResult(
+	val response = LottoResult(
 		day = "2021-12-18",
-		totalSellAmount = 5555L,
-		firstWinAmount = 5555L,
-		firstPrizeWinnerCount = 5555,
-		firstAccumulatedAmount = 5555,
 		no1 = 1,
 		no2 = 11,
 		no3 = 21,
