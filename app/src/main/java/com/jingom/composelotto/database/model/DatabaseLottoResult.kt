@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.jingom.composelotto.network.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.NetworkLottoResult
 
 @VisibleForTesting
 const val INVALID = -1
@@ -43,20 +43,20 @@ data class DatabaseLottoResult(
 	val lotteryNo: Int = INVALID
 ) {
 	companion object {
-		fun from(dhLottoResponseBody: DHLottoResponseBody) = DatabaseLottoResult(
-			day = dhLottoResponseBody.dayOfLottery ?: "",
-			totalSellAmount = dhLottoResponseBody.totalSellAmount,
-			firstWinAmount = dhLottoResponseBody.firstWinAmount,
-			firstPrizeWinnerCount = dhLottoResponseBody.firstPrizeWinnerCount,
-			firstAccumulatedAmount = dhLottoResponseBody.firstAccumulatedAmount,
-			no1 = dhLottoResponseBody.no1,
-			no2 = dhLottoResponseBody.no2,
-			no3 = dhLottoResponseBody.no3,
-			no4 = dhLottoResponseBody.no4,
-			no5 = dhLottoResponseBody.no5,
-			no6 = dhLottoResponseBody.no6,
-			bonusNo = dhLottoResponseBody.bonusNo,
-			lotteryNo = dhLottoResponseBody.lotteryNo
+		fun from(networkLottoResult: NetworkLottoResult) = DatabaseLottoResult(
+			day = networkLottoResult.dayOfLottery ?: "",
+			totalSellAmount = networkLottoResult.totalSellAmount,
+			firstWinAmount = networkLottoResult.firstWinAmount,
+			firstPrizeWinnerCount = networkLottoResult.firstPrizeWinnerCount,
+			firstAccumulatedAmount = networkLottoResult.firstAccumulatedAmount,
+			no1 = networkLottoResult.no1,
+			no2 = networkLottoResult.no2,
+			no3 = networkLottoResult.no3,
+			no4 = networkLottoResult.no4,
+			no5 = networkLottoResult.no5,
+			no6 = networkLottoResult.no6,
+			bonusNo = networkLottoResult.bonusNo,
+			lotteryNo = networkLottoResult.lotteryNo
 		)
 	}
 }

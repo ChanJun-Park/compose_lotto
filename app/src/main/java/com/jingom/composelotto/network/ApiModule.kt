@@ -1,6 +1,6 @@
 package com.jingom.composelotto.network
 
-import com.jingom.composelotto.network.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.NetworkLottoResult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
@@ -22,7 +22,7 @@ private val retrofit = Retrofit.Builder()
 
 interface DHLottoApiService {
 	@GET("common.do")
-	suspend fun getLottoNumber(@Query("method") method: String, @Query("drwNo") drwNo: Int): Response<DHLottoResponseBody>
+	suspend fun getLottoNumber(@Query("method") method: String, @Query("drwNo") drwNo: Int): Response<NetworkLottoResult>
 }
 
 object DHLottoApi {

@@ -5,7 +5,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.jingom.composelotto.network.DHLottoApi
 import com.jingom.composelotto.network.DHLottoApiService
-import com.jingom.composelotto.network.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.NetworkLottoResult
 import com.jingom.composelotto.network.model.isFail
 import com.jingom.composelotto.network.model.isSuccess
 import com.jingom.composelotto.database.LottoDatabase
@@ -25,7 +25,7 @@ class LottoResultSyncWorker(context: Context, workerParameters: WorkerParameters
 		}
 
 		if (firstLotteryNoInDB == null || firstLotteryNoInDB != 1) {
-			var lottoResponse: Response<DHLottoResponseBody>?
+			var lottoResponse: Response<NetworkLottoResult>?
 
 			var lotteryNumber = 1
 
@@ -46,14 +46,14 @@ class LottoResultSyncWorker(context: Context, workerParameters: WorkerParameters
 		return Result.success()
 	}
 
-	private fun isInvalidResponse(response: Response<DHLottoResponseBody>): Boolean {
+	private fun isInvalidResponse(response: Response<NetworkLottoResult>): Boolean {
 		val lottoResponseBody = response.body()
 		return (!response.isSuccessful || lottoResponseBody == null || lottoResponseBody.isFail())
 	}
 
-	private suspend fun saveLottoResponse(dhLottoResponseBody: DHLottoResponseBody) {
-		if (dhLottoResponseBody.isSuccess()) {
-			lottoResultDao.insert(DatabaseLottoResult.from(dhLottoResponseBody))
+	private suspend fun saveLottoResponse(networkLottoResult: NetworkLottoResult) {
+		if (networkLottoResult.isSuccess()) {
+			lottoResultDao.insert(DatabaseLottoResult.from(networkLottoResult))
 		}
 	}
 }

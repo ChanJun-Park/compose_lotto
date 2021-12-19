@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 private const val INVALID = -1
 const val SUCCESS_RESULT_STRING = "success"
 
-data class DHLottoResponseBody(
+data class NetworkLottoResult(
 	@Json(name = "returnValue")
 	val apiResult: String,
 	@Json(name = "drwNoDate")
@@ -36,6 +36,6 @@ data class DHLottoResponseBody(
 	val lotteryNo: Int = INVALID
 )
 
-fun DHLottoResponseBody.isFail() = !isSuccess()
+fun NetworkLottoResult.isFail() = !isSuccess()
 
-fun DHLottoResponseBody.isSuccess() = apiResult == SUCCESS_RESULT_STRING
+fun NetworkLottoResult.isSuccess() = apiResult == SUCCESS_RESULT_STRING

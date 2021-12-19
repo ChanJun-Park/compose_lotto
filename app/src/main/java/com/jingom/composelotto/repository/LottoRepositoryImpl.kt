@@ -1,7 +1,7 @@
 package com.jingom.composelotto.repository
 
 import com.jingom.composelotto.network.DHLottoApiService
-import com.jingom.composelotto.network.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.NetworkLottoResult
 import com.jingom.composelotto.network.model.isFail
 import com.jingom.composelotto.network.model.isSuccess
 import com.jingom.composelotto.datetime.LocalDateUtils
@@ -29,8 +29,8 @@ class LottoRepositoryImpl(
 			return lastLottoResultInDB
 		}
 
-		var lottoResponse: Response<DHLottoResponseBody>?
-		var lastDHLottoResponseBody: DHLottoResponseBody? = null
+		var lottoResponse: Response<NetworkLottoResult>?
+		var lastNetworkLottoResult: NetworkLottoResult? = null
 
 		var lotteryNumber = lastLottoResultInDB?.lotteryNo ?: LottoUtils.KNOWN_LOTTERY_NO
 
@@ -43,27 +43,27 @@ class LottoRepositoryImpl(
 			lottoResponse.body()?.let {
 				saveLottoResponse(it)
 
-				lastDHLottoResponseBody = it
+				lastNetworkLottoResult = it
 				lotteryNumber++
 			}
 		}
 
-		return convertToLottoResult(lastDHLottoResponseBody)
+		return convertToLottoResult(lastNetworkLottoResult)
 	}
 
-	private suspend fun saveLottoResponse(dhLottoResponseBody: DHLottoResponseBody) {
-		if (dhLottoResponseBody.isSuccess()) {
-			lottoResultDao.insert(DatabaseLottoResult.from(dhLottoResponseBody))
+	private suspend fun saveLottoResponse(networkLottoResult: NetworkLottoResult) {
+		if (networkLottoResult.isSuccess()) {
+			lottoResultDao.insert(DatabaseLottoResult.from(networkLottoResult))
 		}
 	}
 
 	@Throws(IllegalStateException::class)
-	private fun convertToLottoResult(dhLottoResponseBody: DHLottoResponseBody?): DatabaseLottoResult {
-		if (dhLottoResponseBody == null || dhLottoResponseBody.isFail()) {
+	private fun convertToLottoResult(networkLottoResult: NetworkLottoResult?): DatabaseLottoResult {
+		if (networkLottoResult == null || networkLottoResult.isFail()) {
 			throw IllegalStateException()
 		}
 
-		return DatabaseLottoResult.from(dhLottoResponseBody)
+		return DatabaseLottoResult.from(networkLottoResult)
 	}
 
 	private fun isLatestLottoResult(latestLottoResultInDB: DatabaseLottoResult) = try {
@@ -72,7 +72,7 @@ class LottoRepositoryImpl(
 		false
 	}
 
-	private fun isInvalidResponse(response: Response<DHLottoResponseBody>): Boolean {
+	private fun isInvalidResponse(response: Response<NetworkLottoResult>): Boolean {
 		val lottoResponseBody = response.body()
 		return (!response.isSuccessful || lottoResponseBody == null || lottoResponseBody.isFail())
 	}
