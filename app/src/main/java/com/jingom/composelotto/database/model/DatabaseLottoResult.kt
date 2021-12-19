@@ -10,10 +10,11 @@ import com.jingom.composelotto.network.model.NetworkLottoResult
 @VisibleForTesting
 const val INVALID = -1
 
-@Entity(tableName = "lotto_result", indices = [Index(value = ["lottery_no"], unique = true)])
+@Entity(tableName = "lotto_result")
 data class DatabaseLottoResult(
-	@PrimaryKey(autoGenerate = true)
-	val id: Long = 0,
+	@PrimaryKey
+	@ColumnInfo(name = "lottery_no")
+	val lotteryNo: Int = INVALID,
 
 	val day: String = "",
 
@@ -37,13 +38,11 @@ data class DatabaseLottoResult(
 	val no6: Int = INVALID,
 
 	@ColumnInfo(name = "bonus_no")
-	val bonusNo: Int = INVALID,
-
-	@ColumnInfo(name = "lottery_no")
-	val lotteryNo: Int = INVALID
+	val bonusNo: Int = INVALID
 ) {
 	companion object {
 		fun from(networkLottoResult: NetworkLottoResult) = DatabaseLottoResult(
+			lotteryNo = networkLottoResult.lotteryNo,
 			day = networkLottoResult.dayOfLottery ?: "",
 			totalSellAmount = networkLottoResult.totalSellAmount,
 			firstWinAmount = networkLottoResult.firstWinAmount,
@@ -56,7 +55,6 @@ data class DatabaseLottoResult(
 			no5 = networkLottoResult.no5,
 			no6 = networkLottoResult.no6,
 			bonusNo = networkLottoResult.bonusNo,
-			lotteryNo = networkLottoResult.lotteryNo
 		)
 	}
 }
