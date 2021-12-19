@@ -1,11 +1,11 @@
-package com.jingom.composelotto.db.dao
+package com.jingom.composelotto.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
 import androidx.room.Update
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.model.LottoResult
 
 @Dao
 interface LottoResultDao {

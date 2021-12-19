@@ -15,8 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jingom.composelotto.R
-import com.jingom.composelotto.api.model.DHLottoResponseBody
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.model.LottoResult
 import com.jingom.composelotto.support.util.DisplayUtils
 import com.jingom.composelotto.ui.theme.LottoNumberSurfaceBlack
 import com.jingom.composelotto.ui.theme.LottoNumberYellow

@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.ViewModelProvider
 import com.jingom.composelotto.repository.LottoRepositoryImpl
-import com.jingom.composelotto.api.DHLottoApi
-import com.jingom.composelotto.db.LottoDatabase
+import com.jingom.composelotto.network.DHLottoApi
+import com.jingom.composelotto.database.LottoDatabase
 import com.jingom.composelotto.ui.lotto.LotteryResult
 import com.jingom.composelotto.ui.theme.ComposeLottoTheme
 

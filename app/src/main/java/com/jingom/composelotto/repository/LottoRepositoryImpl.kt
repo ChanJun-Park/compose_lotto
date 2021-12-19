@@ -1,12 +1,12 @@
 package com.jingom.composelotto.repository
 
-import com.jingom.composelotto.api.DHLottoApiService
-import com.jingom.composelotto.api.model.DHLottoResponseBody
-import com.jingom.composelotto.api.model.isFail
-import com.jingom.composelotto.api.model.isSuccess
+import com.jingom.composelotto.network.DHLottoApiService
+import com.jingom.composelotto.network.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.isFail
+import com.jingom.composelotto.network.model.isSuccess
 import com.jingom.composelotto.datetime.LocalDateUtils
-import com.jingom.composelotto.db.dao.LottoResultDao
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.dao.LottoResultDao
+import com.jingom.composelotto.database.model.LottoResult
 import com.jingom.composelotto.support.util.LottoUtils
 import retrofit2.Response
 

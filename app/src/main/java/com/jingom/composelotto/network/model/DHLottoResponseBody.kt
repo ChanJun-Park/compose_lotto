@@ -1,4 +1,4 @@
-package com.jingom.composelotto.api.model
+package com.jingom.composelotto.network.model
 
 import com.squareup.moshi.Json
 

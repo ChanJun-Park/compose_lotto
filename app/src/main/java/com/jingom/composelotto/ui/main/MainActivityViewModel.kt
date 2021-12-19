@@ -2,9 +2,9 @@ package com.jingom.composelotto.ui.main
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.jingom.composelotto.api.NetworkConnectionLiveData
+import com.jingom.composelotto.network.NetworkConnectionLiveData
 import com.jingom.composelotto.repository.LottoRepository
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.model.LottoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

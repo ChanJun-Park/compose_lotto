@@ -1,11 +1,11 @@
-package com.jingom.composelotto.db
+package com.jingom.composelotto.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jingom.composelotto.db.dao.LottoResultDao
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.dao.LottoResultDao
+import com.jingom.composelotto.database.model.LottoResult
 
 @Database(entities = [LottoResult::class], version = 1, exportSchema = false)
 abstract class LottoDatabase : RoomDatabase() {

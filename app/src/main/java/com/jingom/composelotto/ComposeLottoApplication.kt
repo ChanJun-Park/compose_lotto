@@ -5,9 +5,9 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.jingom.composelotto.api.NetworkConnectionLiveData
-import com.jingom.composelotto.db.LottoDatabase
-import com.jingom.composelotto.db.dao.LottoResultDao
+import com.jingom.composelotto.network.NetworkConnectionLiveData
+import com.jingom.composelotto.database.LottoDatabase
+import com.jingom.composelotto.database.dao.LottoResultDao
 import com.jingom.composelotto.sync.worker.LottoResultSyncWorker
 import timber.log.Timber
 

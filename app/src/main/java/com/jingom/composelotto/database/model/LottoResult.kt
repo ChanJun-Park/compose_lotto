@@ -1,11 +1,11 @@
-package com.jingom.composelotto.db.model
+package com.jingom.composelotto.database.model
 
 import androidx.annotation.VisibleForTesting
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.jingom.composelotto.api.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.DHLottoResponseBody
 
 @VisibleForTesting
 const val INVALID = -1

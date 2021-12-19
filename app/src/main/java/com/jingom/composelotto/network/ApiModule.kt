@@ -1,6 +1,6 @@
-package com.jingom.composelotto.api
+package com.jingom.composelotto.network
 
-import com.jingom.composelotto.api.model.DHLottoResponseBody
+import com.jingom.composelotto.network.model.DHLottoResponseBody
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response

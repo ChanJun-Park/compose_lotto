@@ -1,10 +1,10 @@
-package com.jingom.composelotto.db.dao
+package com.jingom.composelotto.database.dao
 
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jingom.composelotto.db.LottoDatabase
-import com.jingom.composelotto.db.model.LottoResult
+import com.jingom.composelotto.database.LottoDatabase
+import com.jingom.composelotto.database.model.LottoResult
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals

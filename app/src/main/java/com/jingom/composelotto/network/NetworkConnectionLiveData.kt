@@ -1,4 +1,4 @@
-package com.jingom.composelotto.api
+package com.jingom.composelotto.network
 
 import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
