@@ -9,6 +9,7 @@ import com.jingom.composelotto.api.NetworkConnectionLiveData
 import com.jingom.composelotto.db.LottoDatabase
 import com.jingom.composelotto.db.dao.LottoResultDao
 import com.jingom.composelotto.sync.worker.LottoResultSyncWorker
+import timber.log.Timber
 
 class ComposeLottoApplication : Application() {
 
@@ -24,6 +25,8 @@ class ComposeLottoApplication : Application() {
 	}
 
 	private fun init() {
+		Timber.plant(Timber.DebugTree())
+
 		networkConnectionLiveData = NetworkConnectionLiveData(this)
 
 		lottoResultDao = LottoDatabase.getInstance(this).lottoResultDao

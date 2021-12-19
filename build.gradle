@@ -9,7 +9,8 @@ buildscript {
             retrofit : '2.9.0',
             moshi    : '1.9.3',
             room     : '2.3.0',
-            work     : '2.7.0'
+            work     : '2.7.0',
+            timber   : '4.7.1'
     ]
 
     repositories {
