@@ -6,7 +6,7 @@ import com.jingom.composelotto.network.model.isFail
 import com.jingom.composelotto.network.model.isSuccess
 import com.jingom.composelotto.datetime.LocalDateUtils
 import com.jingom.composelotto.database.dao.LottoResultDao
-import com.jingom.composelotto.database.model.LottoResult
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 import com.jingom.composelotto.support.util.LottoUtils
 import retrofit2.Response
 
@@ -15,9 +15,9 @@ class LottoRepositoryImpl(
 	private val lottoResultDao: LottoResultDao
 ) : LottoRepository {
 
-	private lateinit var latestLottoResult: LottoResult
+	private lateinit var latestLottoResult: DatabaseLottoResult
 
-	override suspend fun getLastLottoResult(isInternetAvailable: Boolean): LottoResult {
+	override suspend fun getLastLottoResult(isInternetAvailable: Boolean): DatabaseLottoResult {
 		val lastLottoResultInDB = lottoResultDao.getLatest()
 
 		if (!isInternetAvailable) {
@@ -53,20 +53,20 @@ class LottoRepositoryImpl(
 
 	private suspend fun saveLottoResponse(dhLottoResponseBody: DHLottoResponseBody) {
 		if (dhLottoResponseBody.isSuccess()) {
-			lottoResultDao.insert(LottoResult.from(dhLottoResponseBody))
+			lottoResultDao.insert(DatabaseLottoResult.from(dhLottoResponseBody))
 		}
 	}
 
 	@Throws(IllegalStateException::class)
-	private fun convertToLottoResult(dhLottoResponseBody: DHLottoResponseBody?): LottoResult {
+	private fun convertToLottoResult(dhLottoResponseBody: DHLottoResponseBody?): DatabaseLottoResult {
 		if (dhLottoResponseBody == null || dhLottoResponseBody.isFail()) {
 			throw IllegalStateException()
 		}
 
-		return LottoResult.from(dhLottoResponseBody)
+		return DatabaseLottoResult.from(dhLottoResponseBody)
 	}
 
-	private fun isLatestLottoResult(latestLottoResultInDB: LottoResult) = try {
+	private fun isLatestLottoResult(latestLottoResultInDB: DatabaseLottoResult) = try {
 		LocalDateUtils.todayInKorea() == LocalDateUtils.parseWithDrwPattern(latestLottoResultInDB.day)
 	} catch (e: Exception) {
 		false

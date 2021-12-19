@@ -5,24 +5,24 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
 import androidx.room.Update
-import com.jingom.composelotto.database.model.LottoResult
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 
 @Dao
 interface LottoResultDao {
 	@Insert(onConflict = IGNORE)
-	suspend fun insert(lottoResult: LottoResult): Long
+	suspend fun insert(lottoResult: DatabaseLottoResult): Long
 
 	@Update
-	suspend fun update(lottoResult: LottoResult): Int
+	suspend fun update(lottoResult: DatabaseLottoResult): Int
 
 	@Query("SELECT * FROM lotto_result WHERE id = :id")
-	suspend fun get(id: Long): LottoResult?
+	suspend fun get(id: Long): DatabaseLottoResult?
 
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC")
-	suspend fun getAll(): List<LottoResult>
+	suspend fun getAll(): List<DatabaseLottoResult>
 
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC LIMIT 1")
-	suspend fun getLatest(): LottoResult?
+	suspend fun getLatest(): DatabaseLottoResult?
 
 	@Query("SELECT lottery_no FROM lotto_result ORDER BY lottery_no ASC LIMIT 1")
 	suspend fun getFirstLotteryNoInDB(): Int?

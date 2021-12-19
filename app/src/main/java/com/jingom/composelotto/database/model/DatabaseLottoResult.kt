@@ -11,7 +11,7 @@ import com.jingom.composelotto.network.model.DHLottoResponseBody
 const val INVALID = -1
 
 @Entity(tableName = "lotto_result", indices = [Index(value = ["lottery_no"], unique = true)])
-data class LottoResult(
+data class DatabaseLottoResult(
 	@PrimaryKey(autoGenerate = true)
 	val id: Long = 0,
 
@@ -43,7 +43,7 @@ data class LottoResult(
 	val lotteryNo: Int = INVALID
 ) {
 	companion object {
-		fun from(dhLottoResponseBody: DHLottoResponseBody) = LottoResult(
+		fun from(dhLottoResponseBody: DHLottoResponseBody) = DatabaseLottoResult(
 			day = dhLottoResponseBody.dayOfLottery ?: "",
 			totalSellAmount = dhLottoResponseBody.totalSellAmount,
 			firstWinAmount = dhLottoResponseBody.firstWinAmount,

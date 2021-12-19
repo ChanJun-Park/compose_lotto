@@ -9,7 +9,7 @@ import com.jingom.composelotto.network.model.DHLottoResponseBody
 import com.jingom.composelotto.network.model.isFail
 import com.jingom.composelotto.network.model.isSuccess
 import com.jingom.composelotto.database.LottoDatabase
-import com.jingom.composelotto.database.model.LottoResult
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -53,7 +53,7 @@ class LottoResultSyncWorker(context: Context, workerParameters: WorkerParameters
 
 	private suspend fun saveLottoResponse(dhLottoResponseBody: DHLottoResponseBody) {
 		if (dhLottoResponseBody.isSuccess()) {
-			lottoResultDao.insert(LottoResult.from(dhLottoResponseBody))
+			lottoResultDao.insert(DatabaseLottoResult.from(dhLottoResponseBody))
 		}
 	}
 }

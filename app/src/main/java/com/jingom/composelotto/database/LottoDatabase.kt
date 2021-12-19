@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.jingom.composelotto.database.dao.LottoResultDao
-import com.jingom.composelotto.database.model.LottoResult
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 
-@Database(entities = [LottoResult::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseLottoResult::class], version = 1, exportSchema = false)
 abstract class LottoDatabase : RoomDatabase() {
 
 	abstract val lottoResultDao: LottoResultDao

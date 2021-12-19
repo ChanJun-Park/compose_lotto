@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jingom.composelotto.database.LottoDatabase
-import com.jingom.composelotto.database.model.LottoResult
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -80,7 +80,7 @@ class LottoResultDaoTest {
 	@Test
 	@Throws(Exception::class)
 	fun getAllTest() = runBlocking {
-		val targetResultList = mutableListOf<LottoResult>()
+		val targetResultList = mutableListOf<DatabaseLottoResult>()
 
 		for (index in 1..10) {
 			val lottoResult = createDummyResult().copy(id = index.toLong(), lotteryNo = index)
@@ -109,7 +109,7 @@ class LottoResultDaoTest {
 		assertEquals(0, lottoResultDao.getAll().size)
 	}
 
-	private fun createDummyResult(): LottoResult = LottoResult(
+	private fun createDummyResult(): DatabaseLottoResult = DatabaseLottoResult(
 		no1 = 1,
 		no2 = 2,
 		no3 = 3,
