@@ -23,7 +23,7 @@ interface LottoResultDao {
 	suspend fun getAll(): List<DatabaseLottoResult>
 
 	@Query("SELECT * FROM lotto_result ORDER BY lottery_no DESC LIMIT 1")
-	fun getLatest(): LiveData<DatabaseLottoResult>
+	fun getLatest(): LiveData<DatabaseLottoResult?>
 
 	@Query("SELECT lottery_no FROM lotto_result ORDER BY lottery_no ASC LIMIT 1")
 	suspend fun getFirstLotteryNoInDB(): Int?

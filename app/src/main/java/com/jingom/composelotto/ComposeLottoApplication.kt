@@ -1,14 +1,9 @@
 package com.jingom.composelotto
 
 import android.app.Application
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import com.jingom.composelotto.network.NetworkConnectionLiveData
 import com.jingom.composelotto.database.LottoDatabase
 import com.jingom.composelotto.database.dao.LottoResultDao
-import com.jingom.composelotto.sync.worker.LottoResultSyncWorker
+import com.jingom.composelotto.network.NetworkConnectionLiveData
 import timber.log.Timber
 
 class ComposeLottoApplication : Application() {
@@ -21,7 +16,7 @@ class ComposeLottoApplication : Application() {
 
 		init()
 
-		runBackGroundSync()
+//		runBackGroundSync()
 	}
 
 	private fun init() {
@@ -32,13 +27,13 @@ class ComposeLottoApplication : Application() {
 		lottoResultDao = LottoDatabase.getInstance(this).lottoResultDao
 	}
 
-	private fun runBackGroundSync() {
-		val workConstraint = Constraints.Builder()
-			.setRequiredNetworkType(NetworkType.CONNECTED)
-			.build()
-
-		val workRequest = OneTimeWorkRequestBuilder<LottoResultSyncWorker>().setConstraints(workConstraint).build()
-
-		WorkManager.getInstance(this).enqueue(workRequest)
-	}
+//	private fun runBackGroundSync() {
+//		val workConstraint = Constraints.Builder()
+//			.setRequiredNetworkType(NetworkType.CONNECTED)
+//			.build()
+//
+//		val workRequest = OneTimeWorkRequestBuilder<LottoResultSyncWorker>().setConstraints(workConstraint).build()
+//
+//		WorkManager.getInstance(this).enqueue(workRequest)
+//	}
 }
