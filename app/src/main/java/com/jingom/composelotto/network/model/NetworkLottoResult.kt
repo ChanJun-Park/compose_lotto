@@ -1,5 +1,6 @@
 package com.jingom.composelotto.network.model
 
+import com.jingom.composelotto.database.model.DatabaseLottoResult
 import com.squareup.moshi.Json
 
 private const val INVALID = -1
@@ -39,3 +40,19 @@ data class NetworkLottoResult(
 fun NetworkLottoResult.isFail() = !isSuccess()
 
 fun NetworkLottoResult.isSuccess() = apiResult == SUCCESS_RESULT_STRING
+
+fun NetworkLottoResult.asDatabaseModel() = DatabaseLottoResult(
+	lotteryNo = lotteryNo,
+	day = dayOfLottery ?: "",
+	totalSellAmount = totalSellAmount,
+	firstWinAmount = firstWinAmount,
+	firstPrizeWinnerCount = firstPrizeWinnerCount,
+	firstAccumulatedAmount = firstAccumulatedAmount,
+	no1 = no1,
+	no2 = no2,
+	no3 = no3,
+	no4 = no4,
+	no5 = no5,
+	no6 = no6,
+	bonusNo = bonusNo,
+)

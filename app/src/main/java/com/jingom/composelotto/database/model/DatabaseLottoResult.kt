@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.jingom.composelotto.network.model.NetworkLottoResult
+import com.jingom.composelotto.ui.model.LottoResult
 
 @VisibleForTesting
 const val INVALID = -1
@@ -39,22 +40,16 @@ data class DatabaseLottoResult(
 
 	@ColumnInfo(name = "bonus_no")
 	val bonusNo: Int = INVALID
-) {
-	companion object {
-		fun from(networkLottoResult: NetworkLottoResult) = DatabaseLottoResult(
-			lotteryNo = networkLottoResult.lotteryNo,
-			day = networkLottoResult.dayOfLottery ?: "",
-			totalSellAmount = networkLottoResult.totalSellAmount,
-			firstWinAmount = networkLottoResult.firstWinAmount,
-			firstPrizeWinnerCount = networkLottoResult.firstPrizeWinnerCount,
-			firstAccumulatedAmount = networkLottoResult.firstAccumulatedAmount,
-			no1 = networkLottoResult.no1,
-			no2 = networkLottoResult.no2,
-			no3 = networkLottoResult.no3,
-			no4 = networkLottoResult.no4,
-			no5 = networkLottoResult.no5,
-			no6 = networkLottoResult.no6,
-			bonusNo = networkLottoResult.bonusNo,
-		)
-	}
-}
+)
+
+fun DatabaseLottoResult.asDomainModel() = LottoResult(
+	no1 = no1,
+	no2 = no2,
+	no3 = no3,
+	no4 = no4,
+	no5 = no5,
+	no6 = no6,
+	bonusNo = bonusNo,
+	lotteryNo = lotteryNo,
+	day = day
+)
